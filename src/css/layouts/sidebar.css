@@ -9,10 +9,10 @@
 
 .menu-sidebar {
     height: 100%;
-    width: 240px !important;
+    width: 320px !important;
     background: var(--bs-white);
     top: 0;
-    left: 80px;
+    left: 0px;
     transition: left .4s ease-in-out;
 }
 

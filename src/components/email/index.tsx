@@ -21,13 +21,6 @@ const AdminEmailApp = (props) => {
             {/* ------------------------------------------- */}
             {/* Left Part */}
             {/* ------------------------------------------- */}
-            <Drawer
-              open={isOpenEmail}
-              onClose={handleCloseEmail}
-              className="lg:relative lg:transform-none lg:h-auto lg:bg-transparent max-w-[235px] w-full lg:z-[0]"
-            >
-              <EmailFilter />
-            </Drawer>
             {/* ------------------------------------------- */}
             {/* Middle part */}
             {/* ------------------------------------------- */}

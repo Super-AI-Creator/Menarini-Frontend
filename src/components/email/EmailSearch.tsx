@@ -4,6 +4,7 @@ import  { useContext } from "react";
 import { Icon } from "@iconify/react";
 import { EmailContext } from "src/context/EmailContext";
 import React from 'react';
+import EmailCompose from "./EmailCompose";
 
 
 type Props = {
@@ -20,14 +21,8 @@ const EmailSearch = ({ onClick }: Props) => {
 
   return (
     <>
-      <div className="flex gap-3 bg-white dark:bg-transparent px-6 py-5 items-center">
-        <Button
-          color={"lightprimary"}
-          className="btn-circle p-0 lg:hidden flex"
-          onClick={onClick}
-        >
-          <Icon icon="solar:hamburger-menu-outline" height={18} />
-        </Button>
+      <div className="flex flex-col gap-3 bg-white dark:bg-transparent px-6 py-5 items-center">
+      <EmailCompose />
         <TextInput
           id="search"
           placeholder="Search Emails"

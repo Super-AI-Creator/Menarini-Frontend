@@ -2,23 +2,27 @@ import { Icon } from '@iconify/react';
 import { Badge, Dropdown } from 'flowbite-react';
 import * as profileData from './Data';
 import SimpleBar from 'simplebar-react';
-import { Link } from 'react-router';
 import profileImg from '/src/assets/images/profile/user-1.jpg';
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from 'src/context/AuthContext';
+
 const Profile = () => {
+  const navigate = useNavigate();
   const context = useContext(AuthContext);
   if (!context) throw new Error('AuthContext must be used within AuthContextProvider');
-  const { user } = context;
-  if (!context) throw new Error('AuthContext must be used within AuthContextProvider');
-  const { logout } = context;
-  const handleDropDown = (e: string) => {
-    if (e == 'Sign Out') {
+  const { user, logout } = context;
+
+  const handleDropDown = (title: string, url?: string) => {
+    if (title === 'Sign Out') {
       logout();
+    } else if (url) {
+      navigate('/user_profile');
     }
   };
+
   return (
-    <div className="relative ">
+    <div className="relative">
       <Dropdown
         label=""
         className="w-screen sm:w-[360px] pb-4 rounded-sm"
@@ -41,28 +45,30 @@ const Profile = () => {
             <img src={profileImg} alt="logo" height="56" width="56" className="rounded-full" />
             <div>
               <h5 className="text-15 font-semibold">
-                <p className='text-success'>{user && user["role"]}</p>
+                <p className="text-success">{user?.name}</p>
               </h5>
-              <p className="text-sm text-ld opacity-80">{user && user["email"]}</p>
+              <h5 className="text-15 font-semibold">
+                <p className="text-warning">{user?.role}</p>
+              </h5>
+              <p className="text-sm text-ld opacity-80">{user?.email}</p>
             </div>
           </div>
         </div>
         <SimpleBar>
-          {profileData.profileDD.map((items, index) => (
+          {profileData.profileDD.map((item, index) => (
             <div key={index} className="px-6 mb-2">
               <Dropdown.Item
-                as={Link}
-                to={items.url}
-                onClick={() => handleDropDown(items.title)}
+                onClick={() => handleDropDown(item.title, item.url)}
                 className="px-3 py-2 flex justify-between items-center bg-hover group/link w-full rounded-md"
-                key={index}
               >
-                <div className="flex items-center w-full ">
-                  <div className=" flex gap-3 w-full ">
+                <div className="flex items-center w-full">
+                  <div className="flex gap-3 w-full">
                     <h5 className="text-15 font-normal group-hover/link:text-primary">
-                      {items.title}
+                      {item.title}
                     </h5>
-                    {items.url == '/apps/invoice' ? <Badge color={'lightprimary'}>4</Badge> : null}
+                    {item.url === '/apps/invoice' && (
+                      <Badge color={'lightprimary'}>4</Badge>
+                    )}
                   </div>
                 </div>
               </Dropdown.Item>

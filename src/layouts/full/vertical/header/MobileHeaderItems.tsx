@@ -55,8 +55,6 @@ const MobileHeaderItems = () => {
           {/* App Link Dropwown   */}
           <AppLinks />
 
-          {/* Language Dropdown*/}
-          <Language />
           {/* Profile Dropdown */}
           <Profile />
         </div>

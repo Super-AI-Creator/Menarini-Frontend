@@ -17,9 +17,6 @@ const MobileSidebar = () => {
   return (
     <>
       <div>
-        <div className="minisidebar-icon border-e border-ld bg-white dark:bg-darkgray fixed start-0 z-[1] ">
-          <IconSidebar />
-        </div>
         <Sidebar
           className="fixed menu-sidebar pt-8 bg-white dark:bg-darkgray transition-all"
           aria-label="Sidebar with multi-level dropdown example"

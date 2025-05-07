@@ -20,12 +20,16 @@ const Error = Loadable(lazy(() => import('../views/authentication/Error')));
 
 /* ***Protected Views**** */
 const Dashboard1 = Loadable(lazy(() => import('../views/dashboard/Dashboard1')));
+const Profile = Loadable(lazy(() => import('../views/authentication/Profile')));
 const Email = Loadable(lazy(() => import('../views/email/Email')));
 const DNList = Loadable(lazy(() => import('../views/dnlist/DNList')));
 const POList = Loadable(lazy(() => import('../views/dnlist/POList')));
 const PODetail = Loadable(lazy(() => import('../views/podetail/PODetail')));
 const OCRViewer =  Loadable(lazy(() => import('../views/ocrview')));
+const COAOCRViewer =  Loadable(lazy(() => import('../views/coa_ocrview')));
+
 const NoteViewer = Loadable(lazy(()=>import('../views/notes/Notes')))
+const NotificationViewer = Loadable(lazy(()=>import('../views/notification/Notification')))
 /* ***Router Config*** */
 const Router = [
   {
@@ -66,6 +70,14 @@ const Router = [
         ),
       },
       {
+        path: '/ocr_viewer/:dn/:doc_type/:document/:index',
+        element: (
+          <RoleGuard role={['admin', 'user']}>
+            <COAOCRViewer /> 
+          </RoleGuard>
+        ),
+      },
+      {
         path: '/dn-list',
         element: (
           <RoleGuard role={['admin']}>
@@ -82,10 +94,26 @@ const Router = [
         ),
       },
       {
+        path: '/notification',
+        element: (
+          <RoleGuard role={['admin']}>
+            <NotificationViewer />
+          </RoleGuard>
+        ),
+      },
+      {
         path: '/dn-list/:dn',
         element: (
           <RoleGuard role={['admin']}>
             <POList />
+          </RoleGuard>
+        ),
+      },
+      {
+        path: '/user_profile',
+        element: (
+          <RoleGuard role={['admin']}>
+            <Profile />
           </RoleGuard>
         ),
       },

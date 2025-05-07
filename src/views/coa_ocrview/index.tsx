@@ -19,7 +19,7 @@ const OCRViewer = () => {
   const [highlightedField, setHighlightedField] = useState<{ key: string; page: number; index?: string } | null>(null);
   const [isSelectingRegion, setIsSelectingRegion] = useState(false);
   const [currentSelectingField, setCurrentSelectingField] = useState<{key: string, index: string} | null>(null);
-  const { dn, doc_type, document } = useParams();
+  const { dn, doc_type, document,index } = useParams();
   const [alertState, setAlertState] = useState(false);
   const [alertColor, setAlertColor] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
@@ -28,9 +28,10 @@ const OCRViewer = () => {
   useEffect(() => {
     const fetchAttachmentInfo = async () => {
       try {
-        const response = await axios.post('/api2/dn/attachment_info', {
+        const response = await axios.post('/api2/dn/coa_attachment_info', {
           'DN#': dn,
           'Doc Type': doc_type,
+          'index':index,
         });
         setDocumentData(response.data);
         setUpdatedDocumentData(JSON.parse(JSON.stringify(response.data)));
@@ -45,9 +46,10 @@ const OCRViewer = () => {
   useEffect(() => {
     const fetchOCRInfo = async () => {
       try {
-        const response = await axios.post('/api2/dn/ocr_info', {
+        const response = await axios.post('/api2/dn/coa_ocr_info', {
           'DN#': dn,
           "Doc Type":doc_type,
+          "document" : document,
         });
         setPdfData(response.data);
         const originalPath = response.data[0]?.pdf_path || null;

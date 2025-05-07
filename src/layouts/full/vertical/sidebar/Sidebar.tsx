@@ -50,9 +50,6 @@ const SidebarLayout = () => {
   return (
     <>
       <div className="xl:block hidden">
-        <div className="minisidebar-icon border-e border-ld  fixed start-0 z-[1]">
-          <IconSidebar />
-        </div>
         <Sidebar
           className="fixed menu-sidebar  bg-white dark:bg-darkgray rtl:pe-4 rtl:ps-0 "
           aria-label="Sidebar with multi-level dropdown example"
